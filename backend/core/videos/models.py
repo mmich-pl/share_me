@@ -17,7 +17,7 @@ class Comment(models.Model):
         verbose_name_plural = _("Comments")
 
     def __str__(self):
-        return self.name
+        return self.content
 
     def get_absolute_url(self):
         return reverse("Comment_detail", kwargs={"pk": self.pk})
@@ -26,8 +26,9 @@ class Comment(models.Model):
 class Post(models.Model):
     captions = models.CharField(max_length=255)
     video = models.FileField(upload_to="video/%y")
-    likes = models.ManyToManyField(User, related_name='video_like')
-    coments = models.ManyToManyField(Comment, related_name='video_comment')
+    likes = models.ManyToManyField(User, related_name='video_like', blank=True)
+    coments = models.ManyToManyField(
+        Comment, related_name='video_comment', blank=True)
     postedBy = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.CharField(max_length=50)
 
@@ -36,7 +37,7 @@ class Post(models.Model):
         verbose_name_plural = _("Posts")
 
     def __str__(self):
-        return self.name
+        return self.captions
 
     def get_absolute_url(self):
         return reverse("Post_detail", kwargs={"pk": self.pk})
