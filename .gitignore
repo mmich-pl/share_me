@@ -338,4 +338,5 @@ yarn-error.log*
 .history
 .ionide
 
+backend/core/video/*
 # End of https://www.toptal.com/developers/gitignore/api/django,nextjs,intellij,visualstudiocode
